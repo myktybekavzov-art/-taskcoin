@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>TaskCoin</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -18,26 +18,20 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:#080b0d;
   color:#fff;
-}
-
-button{
-  border:0;
-  font:inherit;
-  cursor:pointer;
+  min-height:100vh;
 }
 
 .app{
   max-width:600px;
   margin:auto;
-  min-height:100vh;
   padding-bottom:90px;
 }
 
 .header{
-  padding:22px 18px 14px;
+  padding:25px 18px 15px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
@@ -46,340 +40,274 @@ button{
   gap:12px;
 }
 
-.logo-icon{
+.logoIcon{
   width:48px;
   height:48px;
-  border-radius:15px;
-  background:#20c997;
+  border-radius:16px;
+  background:#1c2328;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
+  font-size:25px;
 }
 
-.logo-title{
+.logoTitle{
   font-size:22px;
   font-weight:800;
 }
 
-.logo-sub{
-  color:#8e989d;
-  font-size:13px;
+.logoSub{
+  font-size:12px;
+  color:#8f999f;
   margin-top:2px;
 }
 
-.user-avatar{
+.avatar{
   width:46px;
   height:46px;
   border-radius:50%;
-  background:#263238;
+  background:#b7ef68;
+  color:#111;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:18px;
   font-weight:800;
+  font-size:20px;
 }
 
 .page{
   display:none;
-  padding:10px 18px 20px;
+  padding:10px 18px;
 }
 
 .page.active{
   display:block;
 }
 
-.hero{
-  background:linear-gradient(145deg,#11241f,#0d1517);
-  border:1px solid #1d3830;
-  border-radius:25px;
-  padding:24px;
-  margin-top:8px;
+.card{
+  background:#11171b;
+  border:1px solid #273036;
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:16px;
 }
 
-.small-title{
-  color:#9aa5a9;
+.balanceCard{
+  text-align:center;
+  padding:30px 20px;
+}
+
+.balanceTitle{
+  color:#929da3;
   font-size:14px;
+  margin-bottom:8px;
 }
 
 .balance{
-  font-size:42px;
+  font-size:48px;
   font-weight:900;
-  margin:8px 0;
+  letter-spacing:-2px;
 }
 
-.coin{
-  color:#20c997;
+.tc{
+  color:#b7ef68;
 }
 
-.balance-label{
-  color:#9aa5a9;
-}
-
-.primary{
+.btn{
   width:100%;
-  background:#20c997;
-  color:#06100d;
-  padding:15px;
-  border-radius:15px;
+  border:0;
+  border-radius:16px;
+  padding:16px;
+  margin-top:12px;
+  font-size:16px;
   font-weight:800;
-  margin-top:18px;
+  color:#071006;
+  background:#b7ef68;
+  cursor:pointer;
 }
 
-.secondary{
-  width:100%;
-  background:#182023;
+.btn.secondary{
+  background:#20282d;
   color:#fff;
-  padding:15px;
-  border-radius:15px;
-  font-weight:700;
-  margin-top:10px;
-  border:1px solid #263235;
+  border:1px solid #354047;
 }
 
-.section-title{
-  font-size:23px;
-  font-weight:850;
-  margin:20px 0 13px;
+.btn:active{
+  transform:scale(.98);
+}
+
+.sectionTitle{
+  font-size:25px;
+  font-weight:900;
+  margin:8px 0 18px;
 }
 
 .task{
-  background:#121719;
-  border:1px solid #263033;
-  border-radius:19px;
-  padding:17px;
+  background:#11171b;
+  border:1px solid #273036;
+  border-radius:20px;
+  padding:18px;
   margin-bottom:12px;
 }
 
-.task-top{
+.taskTop{
   display:flex;
   justify-content:space-between;
-  gap:10px;
-}
-
-.task-name{
-  font-weight:800;
-  font-size:17px;
-}
-
-.reward{
-  white-space:nowrap;
-  color:#20c997;
-  font-weight:900;
-}
-
-.task-description{
-  color:#9aa5a9;
-  font-size:14px;
-  margin:8px 0 13px;
-}
-
-.task button{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  background:#1c292b;
-  color:#fff;
-  font-weight:700;
-}
-
-.task button.done{
-  background:#17352e;
-  color:#20c997;
-}
-
-.stat-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
   gap:12px;
-  margin-top:16px;
 }
 
-.stat{
-  background:#121719;
-  border:1px solid #263033;
-  border-radius:18px;
-  padding:18px;
+.taskName{
+  font-size:17px;
+  font-weight:800;
 }
 
-.stat-value{
-  font-size:25px;
-  font-weight:850;
-}
-
-.stat-label{
-  color:#8f999d;
-  margin-top:5px;
-  font-size:13px;
-}
-
-.profile-card{
-  background:#121719;
-  border:1px solid #263033;
-  border-radius:22px;
-  padding:22px;
-}
-
-.profile-avatar{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:#20c997;
-  color:#07110e;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
+.taskReward{
+  color:#b7ef68;
   font-weight:900;
-  margin-bottom:15px;
+  white-space:nowrap;
 }
 
-.profile-name{
-  font-size:23px;
-  font-weight:850;
+.taskDescription{
+  color:#929da3;
+  font-size:13px;
+  margin-top:7px;
+  line-height:1.4;
 }
 
-.profile-row{
+.taskDone{
+  margin-top:13px;
+  color:#b7ef68;
+  font-weight:800;
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:78px;
+  background:#101518;
+  border-top:1px solid #293136;
   display:flex;
-  justify-content:space-between;
-  padding:14px 0;
-  border-bottom:1px solid #222a2d;
-  color:#a1abad;
+  justify-content:center;
+  z-index:50;
 }
 
-.profile-row:last-child{
-  border-bottom:0;
+.navInner{
+  width:100%;
+  max-width:600px;
+  display:flex;
+  justify-content:space-around;
 }
 
-.profile-row strong{
-  color:#fff;
-  max-width:55%;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.nav button{
+  background:none;
+  border:0;
+  color:#7e898f;
+  font-size:11px;
+  min-width:70px;
 }
 
-.withdraw-box{
-  background:#121719;
-  border:1px solid #263033;
-  border-radius:22px;
-  padding:20px;
+.nav button.active{
+  color:#b7ef68;
+}
+
+.navIcon{
+  display:block;
+  font-size:24px;
+  margin-bottom:3px;
 }
 
 .input{
   width:100%;
-  padding:15px;
-  border-radius:13px;
-  border:1px solid #303b3e;
-  background:#0b0f11;
+  background:#080b0d;
+  border:1px solid #354047;
   color:#fff;
-  outline:none;
-  margin-top:8px;
-}
-
-.min-info{
-  color:#8f999d;
-  font-size:13px;
-  margin-top:9px;
-}
-
-.notice{
-  background:#182023;
   border-radius:14px;
-  padding:14px;
-  color:#a8b1b4;
+  padding:15px;
+  font-size:17px;
+  outline:none;
+}
+
+.profileRow{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid #252d31;
+}
+
+.profileLabel{
+  color:#89949a;
+}
+
+.profileValue{
+  font-weight:700;
+  max-width:60%;
+  text-align:right;
+  overflow-wrap:anywhere;
+}
+
+.status{
+  text-align:center;
+  color:#8f999f;
   font-size:13px;
-  margin-top:15px;
-}
-
-.bottom-nav{
-  position:fixed;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  width:min(600px,100%);
-  background:rgba(10,14,16,.96);
-  backdrop-filter:blur(15px);
-  border-top:1px solid #222b2e;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:9px 8px calc(9px + env(safe-area-inset-bottom));
-  z-index:20;
-}
-
-.nav-btn{
-  background:none;
-  color:#7f898d;
-  padding:7px 2px;
-  font-size:11px;
-}
-
-.nav-btn.active{
-  color:#20c997;
-}
-
-.nav-icon{
-  font-size:21px;
-  display:block;
-  margin-bottom:3px;
+  padding:10px;
 }
 
 .loading{
   text-align:center;
-  color:#8f999d;
-  padding:40px 0;
+  padding:30px;
+  color:#8f999f;
 }
 
 .error{
-  background:#3a1717;
-  border:1px solid #642424;
-  color:#ff9999;
-  padding:14px;
-  border-radius:14px;
-  margin-top:15px;
+  color:#ff7676;
+  text-align:center;
+  padding:15px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.small{
+  color:#89949a;
   font-size:13px;
+  line-height:1.5;
 }
 
 .modal{
-  display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.72);
-  z-index:50;
+  background:rgba(0,0,0,.75);
+  display:none;
   align-items:flex-end;
+  z-index:100;
 }
 
 .modal.show{
   display:flex;
 }
 
-.modal-content{
+.modalBox{
   width:100%;
   max-width:600px;
   margin:auto;
-  background:#111719;
-  border:1px solid #293336;
+  background:#151b1f;
   border-radius:25px 25px 0 0;
-  padding:22px;
+  padding:24px;
+  border:1px solid #303a40;
 }
 
-.modal-title{
-  font-size:21px;
-  font-weight:850;
+.modalTitle{
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:15px;
 }
 
-.close{
-  float:right;
-  background:#20292c;
+.closeBtn{
+  background:#293136;
   color:#fff;
-  border-radius:50%;
-  width:34px;
-  height:34px;
-}
-
-@media(min-width:601px){
-  .bottom-nav{
-    border-radius:20px 20px 0 0;
-  }
 }
 </style>
 </head>
@@ -388,733 +316,583 @@ button{
 
 <div class="app">
 
-  <header class="header">
-    <div class="logo">
-      <div class="logo-icon">₮</div>
-      <div>
-        <div class="logo-title">TaskCoin</div>
-        <div class="logo-sub">Зарабатывай TC за задания</div>
-      </div>
+<header class="header">
+  <div class="logo">
+    <div class="logoIcon">💎</div>
+    <div>
+      <div class="logoTitle">TaskCoin</div>
+      <div class="logoSub">Зарабатывай TC за задания</div>
+    </div>
+  </div>
+
+  <div class="avatar" id="avatar">?</div>
+</header>
+
+<!-- ГЛАВНАЯ -->
+<section id="home" class="page active">
+
+  <div class="card balanceCard">
+    <div class="balanceTitle">Твой баланс</div>
+    <div class="balance">
+      <span id="homeBalance">0</span>
+      <span class="tc">TC</span>
     </div>
 
-    <div class="user-avatar" id="headerAvatar">?</div>
-  </header>
+    <button class="btn" onclick="showPage('tasks')">
+      🎯 Выполнять задания
+    </button>
 
-  <!-- HOME -->
-  <section id="homePage" class="page active">
+    <button class="btn secondary" onclick="showPage('balance')">
+      💰 Мой баланс
+    </button>
+  </div>
 
-    <div class="hero">
-      <div class="small-title">Твой баланс</div>
+  <div class="card">
+    <div class="sectionTitle">🔥 Как заработать</div>
+    <div class="small">
+      Выполняй задания, получай TC и увеличивай свой баланс.
+      Баланс привязан к твоему Telegram-аккаунту.
+    </div>
+  </div>
 
-      <div class="balance">
-        <span id="homeBalance">0</span>
-        <span class="coin">TC</span>
-      </div>
+</section>
 
-      <div class="balance-label">
-        Выполняй задания и получай TaskCoin
-      </div>
+<!-- ЗАДАНИЯ -->
+<section id="tasks" class="page">
 
-      <button class="primary" onclick="showPage('tasks')">
-        🎯 Выполнять задания
-      </button>
+  <div class="sectionTitle">🎯 Задания</div>
 
-      <button class="secondary" onclick="showPage('balance')">
-        💰 Мой баланс
-      </button>
+  <div id="tasksList">
+    <div class="loading">Загрузка заданий...</div>
+  </div>
+
+</section>
+
+<!-- БАЛАНС -->
+<section id="balance" class="page">
+
+  <div class="sectionTitle">💰 Баланс</div>
+
+  <div class="card balanceCard">
+    <div class="balanceTitle">Доступно</div>
+
+    <div class="balance">
+      <span id="balanceValue">0</span>
+      <span class="tc">TC</span>
     </div>
 
-    <div class="section-title">Статистика</div>
+    <button class="btn" onclick="openWithdraw()">
+      💸 Вывести TC
+    </button>
+  </div>
 
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="stat-value" id="homeTasks">0</div>
-        <div class="stat-label">Заданий выполнено</div>
-      </div>
+  <div class="card">
+    <div class="small">
+      🔒 Минимальный вывод: <b>10000 TC</b><br><br>
+      Заявка на вывод создаётся в игровом режиме.
+    </div>
+  </div>
 
-      <div class="stat">
-        <div class="stat-value">
-          <span id="homeEarned">0</span> TC
-        </div>
-        <div class="stat-label">Всего заработано</div>
-      </div>
+</section>
+
+<!-- ПРОФИЛЬ -->
+<section id="profile" class="page">
+
+  <div class="sectionTitle">👤 Профиль</div>
+
+  <div class="card">
+
+    <div class="profileRow">
+      <span class="profileLabel">Имя</span>
+      <span class="profileValue" id="profileName">—</span>
     </div>
 
-    <div class="notice">
-      🔐 Баланс хранится на сервере и привязан к твоему Telegram ID.
+    <div class="profileRow">
+      <span class="profileLabel">Username</span>
+      <span class="profileValue" id="profileUsername">—</span>
     </div>
 
-  </section>
-
-
-  <!-- TASKS -->
-  <section id="tasksPage" class="page">
-
-    <div class="section-title">🎯 Задания</div>
-
-    <div id="tasksContainer">
-      <div class="loading">Загрузка заданий...</div>
+    <div class="profileRow">
+      <span class="profileLabel">Telegram ID</span>
+      <span class="profileValue" id="profileId">—</span>
     </div>
 
-  </section>
-
-
-  <!-- BALANCE -->
-  <section id="balancePage" class="page">
-
-    <div class="section-title">💰 Баланс</div>
-
-    <div class="hero">
-      <div class="small-title">Доступно</div>
-
-      <div class="balance">
-        <span id="balanceValue">0</span>
-        <span class="coin">TC</span>
-      </div>
-
-      <div class="balance-label">
-        TaskCoin
-      </div>
-
-      <button class="primary" onclick="openWithdraw()">
-        💸 Вывести TC
-      </button>
+    <div class="profileRow">
+      <span class="profileLabel">Выполнено заданий</span>
+      <span class="profileValue" id="profileTasks">0</span>
     </div>
 
-    <div class="notice">
-      🔒 Минимальный вывод: <strong>10000 TC</strong>
-      <br><br>
-      Вывод в этой версии является игровой заявкой и не переводит реальные деньги.
+  </div>
+
+  <div class="card">
+    <div class="small">
+      🔐 Твой баланс хранится на сервере и привязан к Telegram ID.
     </div>
+  </div>
 
-  </section>
-
-
-  <!-- PROFILE -->
-  <section id="profilePage" class="page">
-
-    <div class="section-title">👤 Профиль</div>
-
-    <div class="profile-card">
-
-      <div class="profile-avatar" id="profileAvatar">?</div>
-
-      <div class="profile-name" id="profileName">
-        Загрузка...
-      </div>
-
-      <div class="profile-row">
-        <span>Telegram ID</span>
-        <strong id="profileId">—</strong>
-      </div>
-
-      <div class="profile-row">
-        <span>Username</span>
-        <strong id="profileUsername">—</strong>
-      </div>
-
-      <div class="profile-row">
-        <span>Баланс</span>
-        <strong>
-          <span id="profileBalance">0</span> TC
-        </strong>
-      </div>
-
-      <div class="profile-row">
-        <span>Выполнено</span>
-        <strong id="profileTasks">0</strong>
-      </div>
-
-    </div>
-
-    <div class="notice">
-      🛡️ Данные пользователя получены непосредственно из Telegram.
-    </div>
-
-  </section>
+</section>
 
 </div>
 
+<!-- НИЖНЕЕ МЕНЮ -->
+<nav class="nav">
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
+  <div class="navInner">
 
-  <button class="nav-btn active" id="navHome"
-          onclick="showPage('home')">
-    <span class="nav-icon">🏠</span>
-    Главная
-  </button>
+    <button id="navHome" class="active" onclick="showPage('home')">
+      <span class="navIcon">🏠</span>
+      Главная
+    </button>
 
-  <button class="nav-btn" id="navTasks"
-          onclick="showPage('tasks')">
-    <span class="nav-icon">🎯</span>
-    Задания
-  </button>
+    <button id="navTasks" onclick="showPage('tasks')">
+      <span class="navIcon">🎯</span>
+      Задания
+    </button>
 
-  <button class="nav-btn" id="navBalance"
-          onclick="showPage('balance')">
-    <span class="nav-icon">💰</span>
-    Баланс
-  </button>
+    <button id="navBalance" onclick="showPage('balance')">
+      <span class="navIcon">💰</span>
+      Баланс
+    </button>
 
-  <button class="nav-btn" id="navProfile"
-          onclick="showPage('profile')">
-    <span class="nav-icon">👤</span>
-    Профиль
-  </button>
+    <button id="navProfile" onclick="showPage('profile')">
+      <span class="navIcon">👤</span>
+      Профиль
+    </button>
+
+  </div>
 
 </nav>
 
+<!-- ОКНО ВЫВОДА -->
+<div id="withdrawModal" class="modal">
 
-<!-- WITHDRAW MODAL -->
-<div class="modal" id="withdrawModal">
+  <div class="modalBox">
 
-  <div class="modal-content">
+    <div class="modalTitle">💸 Вывод TC</div>
 
-    <button class="close" onclick="closeWithdraw()">×</button>
-
-    <div class="modal-title">
-      💸 Вывод TC
+    <div class="small">
+      Доступно:
+      <b>
+        <span id="withdrawBalance">0</span> TC
+      </b>
+      <br><br>
+      Минимальная сумма: <b>10000 TC</b>
     </div>
 
-    <p style="color:#929c9f">
-      Доступно:
-      <strong>
-        <span id="withdrawBalance">0</span> TC
-      </strong>
-    </p>
-
-    <label>
-      Сумма вывода
-    </label>
+    <br>
 
     <input
-      class="input"
       id="withdrawAmount"
+      class="input"
       type="number"
       min="10000"
-      placeholder="Минимум 10000 TC"
+      placeholder="Введите сумму"
     >
 
-    <div class="min-info">
-      🔒 Минимальная сумма: 10000 TC
-    </div>
-
-    <button class="primary" onclick="createWithdraw()">
+    <button class="btn" onclick="createWithdraw()">
       Создать заявку
+    </button>
+
+    <button class="btn closeBtn" onclick="closeWithdraw()">
+      Закрыть
     </button>
 
   </div>
 
 </div>
 
-
 <script>
 
 const API_URL =
-  "https://dljgksqjwelvktxahxr.supabase.co/functions/v1/taskcoinuser";
+"https://dljgksqjwelvktxahxr.supabase.co/functions/v1/taskcoinuser";
 
-const tg = window.Telegram?.WebApp;
+const tg = window.Telegram && window.Telegram.WebApp;
 
 let currentUser = null;
 let balance = 0;
 let completedTasks = [];
 
-
-const TASKS = [
+const tasks = [
 
   {
-    id: 1,
-    name: "🎯 Первое задание",
-    description: "Выполни первое задание TaskCoin.",
-    reward: 10
+    id:1,
+    name:"🎯 Первое задание",
+    description:"Выполни первое задание TaskCoin.",
+    reward:10
   },
 
   {
-    id: 2,
-    name: "🚀 Активный пользователь",
-    description: "Будь активным пользователем TaskCoin.",
-    reward: 25
+    id:2,
+    name:"🚀 Активный пользователь",
+    description:"Будь активным пользователем TaskCoin.",
+    reward:25
   },
 
   {
-    id: 3,
-    name: "💎 TaskCoin Hunter",
-    description: "Получи ещё немного TaskCoin.",
-    reward: 50
+    id:3,
+    name:"💎 TaskCoin Hunter",
+    description:"Продолжай выполнять задания.",
+    reward:50
   },
 
   {
-    id: 4,
-    name: "🔥 Большое задание",
-    description: "Выполни большое задание.",
-    reward: 100
+    id:4,
+    name:"🔥 Большое задание",
+    description:"Получи крупную награду.",
+    reward:100
   },
 
   {
-    id: 5,
-    name: "📢 Подпишись на нашу группу",
-    description: "Подпишись на нашу группу и получи 300 TC.",
-    reward: 300,
-    link: "https://t.me/+u5JoD3QrlK01NGRi"
+    id:5,
+    name:"📢 Подпишись на нашу группу",
+    description:"Подпишись на нашу группу и получи 300 TC.",
+    reward:300,
+    link:"https://t.me/+u5JoD3QrlK01NGRi"
   }
 
 ];
 
-
 function showPage(page){
 
-  document.querySelectorAll(".page")
-    .forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(function(el){
+    el.classList.remove("active");
+  });
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(el => el.classList.remove("active"));
+  const target = document.getElementById(page);
 
-  const pageEl =
-    document.getElementById(page + "Page");
-
-  if(pageEl){
-    pageEl.classList.add("active");
+  if(target){
+    target.classList.add("active");
   }
 
-  const nav =
-    document.getElementById("nav" +
-      page.charAt(0).toUpperCase() +
-      page.slice(1));
+  document.querySelectorAll(".nav button").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+
+  const nav = document.getElementById("nav" + page.charAt(0).toUpperCase() + page.slice(1));
 
   if(nav){
     nav.classList.add("active");
   }
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-function haptic(){
-
-  try{
-    tg?.HapticFeedback?.impactOccurred("light");
-  }catch(e){}
-
-}
-
-
-function alertUser(message){
-
-  if(tg?.showAlert){
-    tg.showAlert(message);
-  }else{
-    alert(message);
+  if(tg){
+    tg.HapticFeedback.impactOccurred("light");
   }
 
+  window.scrollTo(0,0);
 }
-
 
 function updateUI(){
 
-  document.getElementById("homeBalance")
-    .textContent = balance.toLocaleString();
+  document.getElementById("homeBalance").textContent = balance;
+  document.getElementById("balanceValue").textContent = balance;
+  document.getElementById("withdrawBalance").textContent = balance;
 
-  document.getElementById("balanceValue")
-    .textContent = balance.toLocaleString();
+  if(currentUser){
 
-  document.getElementById("profileBalance")
-    .textContent = balance.toLocaleString();
+    const first =
+      currentUser.first_name || "";
 
-  document.getElementById("homeTasks")
-    .textContent = currentUser?.tasks_completed ?? 0;
+    const last =
+      currentUser.last_name || "";
 
-  document.getElementById("homeEarned")
-    .textContent = balance.toLocaleString();
+    const fullName =
+      (first + " " + last).trim() || "Пользователь";
 
-  document.getElementById("profileTasks")
-    .textContent = currentUser?.tasks_completed ?? 0;
+    document.getElementById("profileName").textContent =
+      fullName;
 
-  document.getElementById("withdrawBalance")
-    .textContent = balance.toLocaleString();
-
-}
-
-
-function updateProfile(){
-
-  if(!currentUser){
-    return;
-  }
-
-  const first =
-    currentUser.first_name || "";
-
-  const last =
-    currentUser.last_name || "";
-
-  const fullName =
-    `${first} ${last}`.trim() || "Пользователь";
-
-  const username =
-    currentUser.username
+    document.getElementById("profileUsername").textContent =
+      currentUser.username
       ? "@" + currentUser.username
-      : "Не указан";
+      : "нет";
 
-  document.getElementById("profileName")
-    .textContent = fullName;
+    document.getElementById("profileId").textContent =
+      currentUser.id || "—";
 
-  document.getElementById("profileId")
-    .textContent =
-      currentUser.telegram_id || "—";
+    document.getElementById("profileTasks").textContent =
+      currentUser.tasks_completed || 0;
 
-  document.getElementById("profileUsername")
-    .textContent = username;
-
-  const letter =
-    (first || "T").charAt(0).toUpperCase();
-
-  document.getElementById("profileAvatar")
-    .textContent = letter;
-
-  document.getElementById("headerAvatar")
-    .textContent = letter;
+    document.getElementById("avatar").textContent =
+      (first || "T").charAt(0).toUpperCase();
+  }
 
 }
 
+function renderTasks(){
 
-function applyUser(user){
+  const box = document.getElementById("tasksList");
 
-  currentUser = user;
+  box.innerHTML = "";
 
-  balance =
-    Number(user.balance || 0);
+  tasks.forEach(function(task){
 
-  completedTasks =
-    Array.isArray(user.completed_tasks)
-      ? user.completed_tasks.map(Number)
-      : [];
+    const done =
+      completedTasks.includes(Number(task.id));
 
-  updateUI();
-  updateProfile();
-  renderTasks();
+    const div = document.createElement("div");
+
+    div.className = "task";
+
+    let html = "";
+
+    html += '<div class="taskTop">';
+    html += '<div class="taskName">' + task.name + '</div>';
+    html += '<div class="taskReward">+' + task.reward + ' TC</div>';
+    html += '</div>';
+
+    html += '<div class="taskDescription">';
+    html += task.description;
+    html += '</div>';
+
+    if(done){
+
+      html += '<div class="taskDone">✅ Выполнено</div>';
+
+    }else{
+
+      if(task.link){
+
+        html += '<button class="btn secondary" ';
+        html += 'onclick="openTaskLink(\'' + task.link + '\')">';
+        html += '📢 Открыть группу';
+        html += '</button>';
+
+      }
+
+      html += '<button class="btn" ';
+      html += 'onclick="completeTask(' + task.id + ')">';
+      html += 'Получить +' + task.reward + ' TC';
+      html += '</button>';
+
+    }
+
+    div.innerHTML = html;
+
+    box.appendChild(div);
+
+  });
 
 }
 
+function openTaskLink(link){
 
-async function api(action, extra = {}){
+  if(tg && tg.openTelegramLink){
 
-  if(!tg || !tg.initData){
+    tg.openTelegramLink(link);
 
-    throw new Error(
-      "Открой TaskCoin через Telegram."
-    );
+  }else{
+
+    window.open(link,"_blank");
 
   }
 
-  const response =
-    await fetch(API_URL, {
+}
 
-      method:"POST",
+async function apiRequest(payload){
 
-      headers:{
-        "Content-Type":"application/json"
-      },
+  const response = await fetch(API_URL,{
 
-      body:JSON.stringify({
+    method:"POST",
 
-        action,
-        initData:tg.initData,
-        ...extra
+    headers:{
+      "Content-Type":"application/json"
+    },
 
-      })
+    body:JSON.stringify(payload)
 
-    });
+  });
 
-
-  let data;
-
-  try{
-    data = await response.json();
-  }catch(e){
-    throw new Error(
-      "Сервер вернул неправильный ответ."
-    );
-  }
-
+  const data = await response.json();
 
   if(!response.ok){
 
     throw new Error(
-      data.error || "Ошибка сервера."
+      data.error || "Ошибка сервера"
     );
 
   }
-
 
   return data;
 
 }
 
-
 async function loadUser(){
 
   if(!tg || !tg.initData){
 
-    document.getElementById("tasksContainer")
-      .innerHTML = `
-        <div class="error">
-          ⚠️ Открой TaskCoin через Telegram,
-          чтобы получить персональный баланс.
-        </div>
-      `;
+    document.getElementById("tasksList").innerHTML =
+      '<div class="error">Открой TaskCoin внутри Telegram.</div>';
 
     return;
 
   }
 
-
   try{
 
-    const data =
-      await api("sync");
+    const result = await apiRequest({
 
-    if(data.success && data.user){
+      action:"sync",
+      initData:tg.initData
 
-      applyUser(data.user);
+    });
 
+    if(!result.success){
+      throw new Error("Не удалось загрузить пользователя");
     }
+
+    currentUser = result.user;
+
+    balance =
+      Number(result.user.balance || 0);
+
+    completedTasks =
+      Array.isArray(result.user.completed_tasks)
+      ? result.user.completed_tasks.map(Number)
+      : [];
+
+    updateUI();
+    renderTasks();
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById("tasksContainer")
-      .innerHTML = `
-        <div class="error">
-          ⚠️ Не удалось подключиться к серверу.
-          <br><br>
-          ${escapeHtml(error.message)}
-        </div>
-      `;
+    document.getElementById("tasksList").innerHTML =
+      '<div class="error">' +
+      'Ошибка подключения к серверу.<br>' +
+      error.message +
+      '</div>';
 
   }
 
 }
-
-
-function renderTasks(){
-
-  const container =
-    document.getElementById("tasksContainer");
-
-  container.innerHTML = "";
-
-
-  TASKS.forEach(task => {
-
-    const done =
-      completedTasks.includes(task.id);
-
-
-    const div =
-      document.createElement("div");
-
-    div.className = "task";
-
-
-    let extra = "";
-
-    if(task.link){
-
-      extra = `
-        <button
-          onclick="openGroup()"
-          style="margin-bottom:8px">
-          📢 Открыть группу
-        </button>
-      `;
-
-    }
-
-
-    div.innerHTML = `
-
-      <div class="task-top">
-
-        <div class="task-name">
-          ${task.name}
-        </div>
-
-        <div class="reward">
-          +${task.reward} TC
-        </div>
-
-      </div>
-
-      <div class="task-description">
-        ${task.description}
-      </div>
-
-      ${extra}
-
-      <button
-        class="${done ? "done" : ""}"
-        ${done ? "disabled" : ""}
-        onclick="completeTask(${task.id})">
-
-        ${
-          done
-            ? "✓ Выполнено"
-            : "Получить +" + task.reward + " TC"
-        }
-
-      </button>
-    `;
-
-
-    container.appendChild(div);
-
-  });
-
-}
-
-
-function openGroup(){
-
-  haptic();
-
-  const url =
-    "https://t.me/+u5JoD3QrlK01NGRi";
-
-  try{
-
-    if(tg?.openTelegramLink){
-
-      tg.openTelegramLink(url);
-
-    }else{
-
-      window.open(url,"_blank");
-
-    }
-
-  }catch(e){
-
-    window.open(url,"_blank");
-
-  }
-
-}
-
 
 async function completeTask(taskId){
 
-  if(completedTasks.includes(taskId)){
+  if(!tg || !tg.initData){
 
-    alertUser("Это задание уже выполнено.");
-
+    alert("Открой приложение через Telegram.");
     return;
 
   }
 
+  if(completedTasks.includes(Number(taskId))){
 
-  const task =
-    TASKS.find(t => t.id === taskId);
-
-  if(!task){
     return;
+
   }
-
-
-  haptic();
-
 
   try{
 
-    const data =
-      await api(
-        "complete_task",
-        {
-          taskId
-        }
-      );
+    const result = await apiRequest({
 
+      action:"complete_task",
 
-    if(data.success && data.user){
+      initData:tg.initData,
 
-      applyUser(data.user);
+      taskId:Number(taskId)
 
-      alertUser(
-        `🎉 Задание выполнено!\n\n+${data.reward} TC`
+    });
+
+    if(!result.success){
+
+      throw new Error(
+        result.error || "Ошибка"
       );
 
     }
 
+    currentUser = result.user;
+
+    balance =
+      Number(result.user.balance || 0);
+
+    completedTasks =
+      Array.isArray(result.user.completed_tasks)
+      ? result.user.completed_tasks.map(Number)
+      : [];
+
+    updateUI();
+    renderTasks();
+
+    if(tg){
+      tg.HapticFeedback.notificationOccurred("success");
+    }
+
+    if(tg && tg.showAlert){
+
+      tg.showAlert(
+        "🎉 Задание выполнено!\n\n" +
+        "Твой баланс: " +
+        balance +
+        " TC"
+      );
+
+    }else{
+
+      alert(
+        "🎉 Задание выполнено!\n\n" +
+        "Баланс: " +
+        balance +
+        " TC"
+      );
+
+    }
 
   }catch(error){
 
     console.error(error);
 
-    alertUser(
-      "❌ " + error.message
-    );
+    if(tg && tg.showAlert){
+
+      tg.showAlert(
+        "Ошибка: " + error.message
+      );
+
+    }else{
+
+      alert("Ошибка: " + error.message);
+
+    }
 
   }
 
 }
 
-
 function openWithdraw(){
 
-  document.getElementById(
-    "withdrawModal"
-  ).classList.add("show");
+  document.getElementById("withdrawAmount").value = "";
 
-  document.getElementById(
-    "withdrawAmount"
-  ).value = "";
-
-  document.getElementById(
-    "withdrawBalance"
-  ).textContent =
-    balance.toLocaleString();
+  document.getElementById("withdrawModal")
+    .classList.add("show");
 
 }
-
 
 function closeWithdraw(){
 
-  document.getElementById(
-    "withdrawModal"
-  ).classList.remove("show");
+  document.getElementById("withdrawModal")
+    .classList.remove("show");
 
 }
 
-
 function createWithdraw(){
 
-  const input =
-    document.getElementById(
-      "withdrawAmount"
-    );
-
   const amount =
-    Number(input.value);
-
-
-  if(!Number.isFinite(amount)){
-
-    alertUser(
-      "Введите сумму."
+    Number(
+      document.getElementById("withdrawAmount").value
     );
+
+  if(!amount){
+
+    alert("Введите сумму.");
 
     return;
 
   }
 
-
   if(amount < 10000){
 
-    alertUser(
+    alert(
       "Минимальный вывод — 10000 TC."
     );
 
@@ -1122,10 +900,9 @@ function createWithdraw(){
 
   }
 
-
   if(amount > balance){
 
-    alertUser(
+    alert(
       "Недостаточно TC на балансе."
     );
 
@@ -1133,52 +910,37 @@ function createWithdraw(){
 
   }
 
-
   closeWithdraw();
 
+  if(tg && tg.showAlert){
 
-  alertUser(
-    `✅ Заявка на вывод создана!\n\n` +
-    `Сумма: ${amount.toLocaleString()} TC\n\n` +
-    `Статус: ожидает обработки.`
-  );
+    tg.showAlert(
+      "✅ Заявка на вывод создана!\n\n" +
+      "Сумма: " + amount + " TC\n\n" +
+      "Статус: ожидает обработки."
+    );
+
+  }else{
+
+    alert(
+      "✅ Заявка на вывод создана!\n\n" +
+      "Сумма: " + amount + " TC\n\n" +
+      "Статус: ожидает обработки."
+    );
+
+  }
 
 }
-
-
-function escapeHtml(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
 
 if(tg){
 
   tg.ready();
-
-  try{
-    tg.expand();
-  }catch(e){}
+  tg.expand();
 
 }
 
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    renderTasks();
-
-    loadUser();
-
-  }
-);
+renderTasks();
+loadUser();
 
 </script>
 
