@@ -271,7 +271,9 @@ button.done{
         </div>
 
         <div class="subtitle">
-            Заработано за выполнение заданий
+            Заработано за выполнение заданий <button onclick="showPage('tasks')">
+    Зарабатывать TC
+</button>
         </div>
     </div>
 
@@ -285,7 +287,13 @@ button.done{
 
         <button onclick="showPage('tasks')">
             Зарабатывать TC
-        </button>
+        </button><button onclick="openWithdraw()" style="
+    margin-top:12px;
+    background:#202936;
+    color:white;
+">
+    💸 Вывести TC
+</button>
     </div>
 
 </section>
@@ -676,7 +684,118 @@ updateBalance();
 
 renderTasks();
 
-loadTelegramUser();
+loadTelegramUser();function openWithdraw() {
+    const modal = document.createElement("div");
+
+    modal.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.75);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+        padding:20px;
+    `;
+
+    modal.innerHTML = `
+        <div style="
+            width:100%;
+            max-width:420px;
+            background:#111821;
+            border:1px solid #263242;
+            border-radius:22px;
+            padding:24px;
+            color:white;
+        ">
+            <h2>💸 Вывод TC</h2>
+
+            <p style="color:#9aa6b6">
+                Доступно: <b>${balance} TC</b>
+            </p>
+
+            <label>Сколько вывести?</label>
+
+            <input
+                id="withdrawAmount"
+                type="number"
+                min="100"
+                placeholder="Например: 100"
+                style="
+                    width:100%;
+                    box-sizing:border-box;
+                    margin-top:10px;
+                    padding:15px;
+                    border-radius:12px;
+                    border:1px solid #344154;
+                    background:#0b1016;
+                    color:white;
+                    font-size:18px;
+                "
+            >
+
+            <p style="color:#9aa6b6">
+                🔒 Минимальный вывод: 100 TC
+            </p>
+
+            <button
+                onclick="sendWithdraw()"
+                style="
+                    width:100%;
+                    padding:16px;
+                    border:none;
+                    border-radius:14px;
+                    background:#32d583;
+                    color:#06100b;
+                    font-size:18px;
+                    font-weight:700;
+                "
+            >
+                Создать заявку
+            </button>
+
+            <button
+                onclick="this.closest('.withdraw-modal').remove()"
+                style="
+                    width:100%;
+                    margin-top:10px;
+                    padding:14px;
+                    border:none;
+                    background:transparent;
+                    color:#9aa6b6;
+                    font-size:16px;
+                "
+            >
+                Отмена
+            </button>
+        </div>
+    `;
+
+    modal.className = "withdraw-modal";
+    document.body.appendChild(modal);
+}
+
+function sendWithdraw() {
+    const amount = Number(
+        document.getElementById("withdrawAmount").value
+    );
+
+    if (!amount || amount < 100) {
+        alert("Минимальная сумма вывода — 100 TC");
+        return;
+    }
+
+    if (amount > balance) {
+        alert("Недостаточно TC на балансе");
+        return;
+    }
+
+    alert(
+        "✅ Заявка на вывод создана!\n\n" +
+        "Сумма: " + amount + " TC\n" +
+        "Статус: ожидает обработки"
+    );
+}
 
 </script>
 
