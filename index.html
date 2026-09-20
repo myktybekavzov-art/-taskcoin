@@ -719,7 +719,7 @@ loadTelegramUser();function openWithdraw() {
             <input
                 id="withdrawAmount"
                 type="number"
-                min="100"
+                min="10000"
                 placeholder="Например: 100"
                 style="
                     width:100%;
@@ -735,7 +735,7 @@ loadTelegramUser();function openWithdraw() {
             >
 
             <p style="color:#9aa6b6">
-                🔒 Минимальный вывод: 100 TC
+                🔒 Минимальный вывод: 10000 TC
             </p>
 
             <button
@@ -780,8 +780,8 @@ function sendWithdraw() {
         document.getElementById("withdrawAmount").value
     );
 
-    if (!amount || amount < 100) {
-        alert("Минимальная сумма вывода — 100 TC");
+    if (!amount || amount < 10000) {
+        alert("Минимальная сумма вывода — 10000 TC");
         return;
     }
 
