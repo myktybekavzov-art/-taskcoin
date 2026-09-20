@@ -287,12 +287,22 @@ button.done{
 
         <button onclick="showPage('tasks')">
             Зарабатывать TC
-        </button><button onclick="openWithdraw()" style="
+        </button>
+
+<button onclick="openWithdraw()" style="
     margin-top:12px;
     background:#202936;
     color:white;
 ">
     💸 Вывести TC
+</button>
+
+<button onclick="openShop()" style="
+    margin-top:12px;
+    background:#f5a623;
+    color:white;
+">
+    🛒 Магазин TC
 </button>
     </div>
 
@@ -867,6 +877,69 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(profileInfo);
 });
 </script>
+    function openShop() {
+    const shop = document.createElement("div");
+
+    shop.id = "shopModal";
+
+    shop.style = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.75);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+    `;
+
+    shop.innerHTML = `
+        <div style="
+            width:90%;
+            max-width:400px;
+            background:#111821;
+            border:1px solid #263242;
+            border-radius:20px;
+            padding:20px;
+            color:white;
+            text-align:center;
+            font-family:Arial,sans-serif;
+        ">
+
+            <h2>🛒 Магазин TC</h2>
+
+            <p style="color:#aaa;">
+                Покупка виртуальных TC
+            </p>
+
+            <button onclick="buyTC(1000)" style="
+                width:100%;
+                margin:8px 0;
+                padding:15px;
+                border:0;
+                border-radius:12px;
+                background:#229ED9;
+                color:white;
+                font-size:16px;
+            ">
+                1000 TC — ⭐ 10
+            </button>
+
+            <button onclick="buyTC(5000)" style="
+                width:100%;
+                margin:8px 0;
+                padding:15px;
+                border:0;
+                border-radius:12px;
+                background:#229ED9;
+                color:white;
+                font-size:16px;
+            ">
+                5000 TC — ⭐ 40
+            </button>
+
+            <button onclick="buyTC(15000)" style="
+                width:100%;
+                margin:8
 
 </body>
 
