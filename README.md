@@ -1,2 +1,685 @@
 # -taskcoin
-    Public
+    <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>TaskCoin</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#080b10;
+    color:#fff;
+}
+
+.app{
+    max-width:480px;
+    min-height:100vh;
+    margin:auto;
+    padding:20px 16px 90px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#35d07f;
+}
+
+.user{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#1d2530;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.card{
+    background:#111720;
+    border:1px solid #202a36;
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:16px;
+}
+
+.balance-title{
+    color:#8e99a8;
+    font-size:14px;
+}
+
+.balance{
+    font-size:38px;
+    font-weight:800;
+    margin-top:5px;
+}
+
+.coin{
+    color:#35d07f;
+}
+
+.subtitle{
+    color:#8e99a8;
+    margin-top:5px;
+}
+
+.section-title{
+    font-size:20px;
+    font-weight:750;
+    margin:22px 0 12px;
+}
+
+.task{
+    background:#111720;
+    border:1px solid #202a36;
+    border-radius:18px;
+    padding:17px;
+    margin-bottom:12px;
+}
+
+.task-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.task-name{
+    font-weight:700;
+    font-size:16px;
+}
+
+.reward{
+    color:#35d07f;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.task-description{
+    color:#8e99a8;
+    font-size:13px;
+    margin:8px 0 13px;
+}
+
+button{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:13px;
+    font-size:15px;
+    font-weight:700;
+    background:#35d07f;
+    color:#06100a;
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+button.done{
+    background:#28313d;
+    color:#8792a0;
+}
+
+.nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:480px;
+    background:#0e131a;
+    border-top:1px solid #202a36;
+    display:flex;
+    padding:10px 8px calc(10px + env(safe-area-inset-bottom));
+}
+
+.nav button{
+    background:transparent;
+    color:#778291;
+    font-size:12px;
+    padding:7px 3px;
+}
+
+.nav button.active{
+    color:#35d07f;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.profile-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid #202a36;
+}
+
+.profile-row:last-child{
+    border-bottom:0;
+}
+
+.muted{
+    color:#8e99a8;
+}
+
+.referral{
+    word-break:break-all;
+    background:#0a0e13;
+    border-radius:12px;
+    padding:12px;
+    color:#35d07f;
+    margin-top:10px;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <div class="logo">💎 Task<span>Coin</span></div>
+    <div class="user" id="avatar">👤</div>
+</header>
+
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+    <div class="card">
+        <div class="balance-title">Твой баланс</div>
+        <div class="balance">
+            <span id="balance">0</span>
+            <span class="coin">TC</span>
+        </div>
+        <div class="subtitle">TaskCoin</div>
+    </div>
+
+    <div class="card">
+        <div class="section-title" style="margin-top:0">
+            🚀 Добро пожаловать!
+        </div>
+
+        <div class="subtitle">
+            Выполняй задания, получай TaskCoin и приглашай друзей.
+        </div>
+    </div>
+
+    <div class="section-title">🔥 Быстрый старт</div>
+
+    <div class="card">
+        <div class="task-top">
+            <div class="task-name">📋 Выполни задания</div>
+            <div class="reward">+TC</div>
+        </div>
+
+        <div class="task-description">
+            Перейди в раздел «Задания» и начни зарабатывать.
+        </div>
+
+        <button onclick="showPage('tasks')">
+            Открыть задания
+        </button>
+    </div>
+
+</section>
+
+
+<!-- TASKS -->
+<section id="tasks" class="page">
+
+    <div class="section-title">📋 Задания</div>
+
+    <div id="taskList"></div>
+
+</section>
+
+
+<!-- BALANCE -->
+<section id="balancePage" class="page">
+
+    <div class="section-title">💰 Баланс</div>
+
+    <div class="card">
+        <div class="balance-title">Доступно</div>
+
+        <div class="balance">
+            <span id="balance2">0</span>
+            <span class="coin"> TC</span>
+        </div>
+
+        <div class="subtitle">
+            Заработано за выполнение заданий
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="task-name">💎 Как заработать?</div>
+
+        <div class="task-description">
+            Выполняй доступные задания. После выполнения
+            награда автоматически добавляется на баланс.
+        </div>
+
+        <button onclick="showPage('tasks')">
+            Зарабатывать TC
+        </button>
+    </div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+
+    <div class="section-title">👤 Профиль</div>
+
+    <div class="card">
+
+        <div class="profile-row">
+            <span class="muted">Имя</span>
+            <span id="username">Пользователь</span>
+        </div>
+
+        <div class="profile-row">
+            <span class="muted">ID</span>
+            <span id="userId">—</span>
+        </div>
+
+        <div class="profile-row">
+            <span class="muted">Выполнено заданий</span>
+            <span id="completed">0</span>
+        </div>
+
+        <div class="profile-row">
+            <span class="muted">Заработано</span>
+            <span><span id="earned">0</span> TC</span>
+        </div>
+
+    </div>
+
+
+    <div class="section-title">👥 Реферальная система</div>
+
+    <div class="card">
+
+        <div class="task-name">
+            Приглашай друзей
+        </div>
+
+        <div class="task-description">
+            Скоро здесь появится твоя реферальная ссылка.
+        </div>
+
+        <div class="referral" id="referral">
+            Загрузка...
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- NAVIGATION -->
+<nav class="nav">
+
+    <button id="navHome" class="active" onclick="showPage('home')">
+        🏠<br>Главная
+    </button>
+
+    <button id="navTasks" onclick="showPage('tasks')">
+        📋<br>Задания
+    </button>
+
+    <button id="navBalance" onclick="showPage('balancePage')">
+        💰<br>Баланс
+    </button>
+
+    <button id="navProfile" onclick="showPage('profile')">
+        👤<br>Профиль
+    </button>
+
+</nav>
+
+
+<script>
+
+const tg = window.Telegram && window.Telegram.WebApp;
+
+if(tg){
+    tg.ready();
+    tg.expand();
+}
+
+
+/* -------------------------
+   DATA
+------------------------- */
+
+let balance = Number(localStorage.getItem("taskcoin_balance") || 0);
+
+let completed =
+    Number(localStorage.getItem("taskcoin_completed") || 0);
+
+let completedTasks =
+    JSON.parse(
+        localStorage.getItem("taskcoin_tasks") || "[]"
+    );
+
+
+const tasks = [
+
+    {
+        id:1,
+        name:"🎯 Первое задание",
+        description:"Познакомься с TaskCoin и получи стартовую награду.",
+        reward:10
+    },
+
+    {
+        id:2,
+        name:"🚀 Активный пользователь",
+        description:"Открой TaskCoin и выполни это простое задание.",
+        reward:25
+    },
+
+    {
+        id:3,
+        name:"💎 TaskCoin Hunter",
+        description:"Собери ещё одну награду TaskCoin.",
+        reward:50
+    },
+
+    {
+        id:4,
+        name:"🔥 Большое задание",
+        description:"Продолжай пользоваться приложением и зарабатывай.",
+        reward:100
+    }
+
+];
+
+
+/* -------------------------
+   SAVE
+------------------------- */
+
+function save(){
+
+    localStorage.setItem(
+        "taskcoin_balance",
+        balance
+    );
+
+    localStorage.setItem(
+        "taskcoin_completed",
+        completed
+    );
+
+    localStorage.setItem(
+        "taskcoin_tasks",
+        JSON.stringify(completedTasks)
+    );
+
+}
+
+
+/* -------------------------
+   BALANCE UI
+------------------------- */
+
+function updateBalance(){
+
+    document.getElementById("balance").textContent =
+        balance;
+
+    document.getElementById("balance2").textContent =
+        balance;
+
+    document.getElementById("completed").textContent =
+        completed;
+
+    document.getElementById("earned").textContent =
+        balance;
+
+}
+
+
+/* -------------------------
+   TASKS
+------------------------- */
+
+function renderTasks(){
+
+    const list =
+        document.getElementById("taskList");
+
+    list.innerHTML = "";
+
+    tasks.forEach(task => {
+
+        const isDone =
+            completedTasks.includes(task.id);
+
+        const div =
+            document.createElement("div");
+
+        div.className = "task";
+
+        div.innerHTML = `
+
+            <div class="task-top">
+
+                <div class="task-name">
+                    ${task.name}
+                </div>
+
+                <div class="reward">
+                    +${task.reward} TC
+                </div>
+
+            </div>
+
+            <div class="task-description">
+                ${task.description}
+            </div>
+
+            <button
+                class="${isDone ? "done" : ""}"
+                onclick="completeTask(${task.id})"
+                ${isDone ? "disabled" : ""}
+            >
+                ${isDone ? "✓ Выполнено" : "Выполнить"}
+            </button>
+
+        `;
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+/* -------------------------
+   COMPLETE TASK
+------------------------- */
+
+function completeTask(id){
+
+    if(completedTasks.includes(id))
+        return;
+
+    const task =
+        tasks.find(t => t.id === id);
+
+    if(!task)
+        return;
+
+    balance += task.reward;
+
+    completed++;
+
+    completedTasks.push(id);
+
+    save();
+
+    updateBalance();
+
+    renderTasks();
+
+    if(tg){
+
+        try{
+
+            tg.HapticFeedback.notificationOccurred(
+                "success"
+            );
+
+        }catch(e){}
+
+    }
+
+}
+
+
+/* -------------------------
+   PAGES
+------------------------- */
+
+function showPage(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p =>
+            p.classList.remove("active")
+        );
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+
+    if(page === "home")
+        document.getElementById("navHome")
+            .classList.add("active");
+
+    if(page === "tasks")
+        document.getElementById("navTasks")
+            .classList.add("active");
+
+    if(page === "balancePage")
+        document.getElementById("navBalance")
+            .classList.add("active");
+
+    if(page === "profile")
+        document.getElementById("navProfile")
+            .classList.add("active");
+
+}
+
+
+/* -------------------------
+   TELEGRAM USER
+------------------------- */
+
+function loadTelegramUser(){
+
+    if(
+        tg &&
+        tg.initDataUnsafe &&
+        tg.initDataUnsafe.user
+    ){
+
+        const user =
+            tg.initDataUnsafe.user;
+
+        document.getElementById("username")
+            .textContent =
+            user.first_name ||
+            user.username ||
+            "Пользователь";
+
+        document.getElementById("userId")
+            .textContent =
+            user.id;
+
+        document.getElementById("avatar")
+            .textContent = "👤";
+
+
+        const botUsername =
+            "YOUR_BOT_USERNAME";
+
+        document.getElementById("referral")
+            .textContent =
+            "https://t.me/" +
+            botUsername +
+            "?start=" +
+            user.id;
+
+    }else{
+
+        document.getElementById("username")
+            .textContent =
+            "Тестовый пользователь";
+
+        document.getElementById("userId")
+            .textContent =
+            "—";
+
+        document.getElementById("referral")
+            .textContent =
+            "Открой приложение через Telegram";
+
+    }
+
+}
+
+
+/* -------------------------
+   START
+------------------------- */
+
+updateBalance();
+
+renderTasks();
+
+loadTelegramUser();
+
+</script>
+
+</body>
+</html>
