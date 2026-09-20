@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TaskCoin</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(160deg,#071a3d,#0b3c78);color:#fff;min-height:100vh}
+.app{max-width:480px;margin:auto;padding:24px 18px}.logo{text-align:center;font-size:34px;font-weight:800;margin:12px 0 6px}.sub{text-align:center;color:#b9d7ff;margin-bottom:22px}
+.card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:22px;padding:22px;margin-bottom:16px;backdrop-filter:blur(8px)}
+.balance{text-align:center}.coin{font-size:64px}.amount{font-size:42px;font-weight:800;margin:4px}.label{color:#b9d7ff}
+button{width:100%;border:0;border-radius:16px;padding:16px;margin-top:12px;font-size:18px;font-weight:700;cursor:pointer;background:#ffd43b;color:#172033}
+button:active{transform:scale(.98)}.task{display:flex;align-items:center;gap:12px}.task span{font-size:30px}.task p{margin:3px 0;color:#b9d7ff;font-size:14px}.task button{width:auto;margin:0;padding:11px 15px;font-size:14px}
+.small{font-size:13px;text-align:center;color:#9fc4ed;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="logo">🪙 TaskCoin</div>
+  <div class="sub">Выполняй задания, играй и зарабатывай монеты!</div>
+
+  <div class="card balance">
+    <div class="coin">🪙</div>
+    <div class="amount" id="balance">0</div>
+    <div class="label">твоих TaskCoin</div>
+    <button id="earn">⚡ Заработать +1</button>
+  </div>
+
+  <div class="card">
+    <h2>📋 Задания</h2>
+    <div class="task">
+      <span>🎁</span>
+      <div style="flex:1"><b>Первое задание</b><p>Нажми кнопку и получи награду</p></div>
+      <button id="task">+10</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>👤 Профиль</h2>
+    <div id="user">Игрок</div>
+  </div>
+
+  <div class="small">Баланс сохраняется на этом устройстве.</div>
+</div>
+
+<script>
+const tg = window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();}
+const key='taskcoin_balance';
+let balance=Number(localStorage.getItem(key)||0);
+const balanceEl=document.getElementById('balance');
+function render(){balanceEl.textContent=balance;localStorage.setItem(key,balance);}
+document.getElementById('earn').onclick=()=>{balance++;render();};
+document.getElementById('task').onclick=()=>{balance+=10;render();document.getElementById('task').disabled=true;document.getElementById('task').textContent='✓';};
+const u=tg?.initDataUnsafe?.user;
+if(u) document.getElementById('user').textContent='👋 '+(u.first_name||'Игрок');
+render();
+</script>
+</body>
+</html>
