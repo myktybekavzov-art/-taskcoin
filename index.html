@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
 <title>TaskCoin</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -13,22 +14,26 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-body{
+html,body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  padding:0;
   background:#080b0d;
   color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+
+body{
   min-height:100vh;
 }
 
 .app{
   max-width:600px;
   margin:auto;
-  padding-bottom:90px;
+  padding-bottom:100px;
 }
 
 .header{
-  padding:25px 18px 15px;
+  padding:22px 18px 14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -53,13 +58,13 @@ body{
 
 .logoTitle{
   font-size:22px;
-  font-weight:800;
+  font-weight:900;
 }
 
 .logoSub{
-  font-size:12px;
-  color:#8f999f;
   margin-top:2px;
+  color:#8f999f;
+  font-size:12px;
 }
 
 .avatar{
@@ -71,8 +76,8 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:800;
   font-size:20px;
+  font-weight:900;
 }
 
 .page{
@@ -88,7 +93,7 @@ body{
   background:#11171b;
   border:1px solid #273036;
   border-radius:22px;
-  padding:22px;
+  padding:20px;
   margin-bottom:16px;
 }
 
@@ -106,7 +111,6 @@ body{
 .balance{
   font-size:48px;
   font-weight:900;
-  letter-spacing:-2px;
 }
 
 .tc{
@@ -123,7 +127,10 @@ body{
   font-weight:800;
   color:#071006;
   background:#b7ef68;
-  cursor:pointer;
+}
+
+.btn:active{
+  transform:scale(.98);
 }
 
 .btn.secondary{
@@ -132,8 +139,8 @@ body{
   border:1px solid #354047;
 }
 
-.btn:active{
-  transform:scale(.98);
+.btn:disabled{
+  opacity:.5;
 }
 
 .sectionTitle{
@@ -145,9 +152,9 @@ body{
 .task{
   background:#11171b;
   border:1px solid #273036;
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:12px;
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:16px;
 }
 
 .taskTop{
@@ -159,6 +166,7 @@ body{
 .taskName{
   font-size:17px;
   font-weight:800;
+  line-height:1.3;
 }
 
 .taskReward{
@@ -170,70 +178,32 @@ body{
 .taskDescription{
   color:#929da3;
   font-size:13px;
-  margin-top:7px;
-  line-height:1.4;
+  margin-top:8px;
+  line-height:1.5;
 }
 
 .taskDone{
-  margin-top:13px;
+  margin-top:15px;
   color:#b7ef68;
   font-weight:800;
 }
 
-.nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:78px;
-  background:#101518;
-  border-top:1px solid #293136;
-  display:flex;
-  justify-content:center;
-  z-index:50;
-}
-
-.navInner{
-  width:100%;
-  max-width:600px;
-  display:flex;
-  justify-content:space-around;
-}
-
-.nav button{
-  background:none;
-  border:0;
-  color:#7e898f;
-  font-size:11px;
-  min-width:70px;
-}
-
-.nav button.active{
-  color:#b7ef68;
-}
-
-.navIcon{
-  display:block;
-  font-size:24px;
-  margin-bottom:3px;
-}
-
-.input{
-  width:100%;
-  background:#080b0d;
-  border:1px solid #354047;
-  color:#fff;
-  border-radius:14px;
-  padding:15px;
-  font-size:17px;
-  outline:none;
+.small{
+  color:#89949a;
+  font-size:13px;
+  line-height:1.6;
 }
 
 .profileRow{
   display:flex;
   justify-content:space-between;
+  gap:15px;
   padding:14px 0;
   border-bottom:1px solid #252d31;
+}
+
+.profileRow:last-child{
+  border-bottom:0;
 }
 
 .profileLabel{
@@ -242,44 +212,53 @@ body{
 
 .profileValue{
   font-weight:700;
-  max-width:60%;
   text-align:right;
   overflow-wrap:anywhere;
 }
 
-.status{
-  text-align:center;
-  color:#8f999f;
-  font-size:13px;
-  padding:10px;
+.nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:78px;
+  background:#101518;
+  border-top:1px solid #293136;
+  z-index:50;
 }
 
-.loading{
-  text-align:center;
-  padding:30px;
-  color:#8f999f;
+.navInner{
+  width:100%;
+  max-width:600px;
+  height:100%;
+  margin:auto;
+  display:flex;
+  justify-content:space-around;
 }
 
-.error{
-  color:#ff7676;
-  text-align:center;
-  padding:15px;
+.nav button{
+  flex:1;
+  max-width:120px;
+  background:none;
+  border:0;
+  color:#7e898f;
+  font-size:11px;
 }
 
-.hidden{
-  display:none!important;
+.nav button.active{
+  color:#b7ef68;
 }
 
-.small{
-  color:#89949a;
-  font-size:13px;
-  line-height:1.5;
+.navIcon{
+  display:block;
+  font-size:23px;
+  margin-bottom:3px;
 }
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.78);
   display:none;
   align-items:flex-end;
   z-index:100;
@@ -294,9 +273,9 @@ body{
   max-width:600px;
   margin:auto;
   background:#151b1f;
+  border:1px solid #303a40;
   border-radius:25px 25px 0 0;
   padding:24px;
-  border:1px solid #303a40;
 }
 
 .modalTitle{
@@ -305,9 +284,31 @@ body{
   margin-bottom:15px;
 }
 
-.closeBtn{
-  background:#293136;
+.input{
+  width:100%;
+  background:#080b0d;
+  border:1px solid #354047;
   color:#fff;
+  border-radius:14px;
+  padding:15px;
+  font-size:17px;
+  outline:none;
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#8f999f;
+}
+
+.error{
+  background:#241719;
+  border:1px solid #55282d;
+  border-radius:18px;
+  color:#ff8a8a;
+  padding:18px;
+  text-align:center;
+  line-height:1.5;
 }
 </style>
 </head>
@@ -328,14 +329,16 @@ body{
   <div class="avatar" id="avatar">?</div>
 </header>
 
-<!-- ГЛАВНАЯ -->
+
 <section id="home" class="page active">
 
   <div class="card balanceCard">
+
     <div class="balanceTitle">Твой баланс</div>
+
     <div class="balance">
       <span id="homeBalance">0</span>
-      <span class="tc">TC</span>
+      <span class="tc"> TC</span>
     </div>
 
     <button class="btn" onclick="showPage('tasks')">
@@ -345,19 +348,25 @@ body{
     <button class="btn secondary" onclick="showPage('balance')">
       💰 Мой баланс
     </button>
+
   </div>
 
   <div class="card">
+
     <div class="sectionTitle">🔥 Как заработать</div>
+
     <div class="small">
-      Выполняй задания, получай TC и увеличивай свой баланс.
-      Баланс привязан к твоему Telegram-аккаунту.
+      Выполняй задания и получай TC.
+      <br><br>
+      Твой баланс хранится на сервере
+      и привязан к Telegram-аккаунту.
     </div>
+
   </div>
 
 </section>
 
-<!-- ЗАДАНИЯ -->
+
 <section id="tasks" class="page">
 
   <div class="sectionTitle">🎯 Задания</div>
@@ -368,34 +377,41 @@ body{
 
 </section>
 
-<!-- БАЛАНС -->
+
 <section id="balance" class="page">
 
   <div class="sectionTitle">💰 Баланс</div>
 
   <div class="card balanceCard">
+
     <div class="balanceTitle">Доступно</div>
 
     <div class="balance">
       <span id="balanceValue">0</span>
-      <span class="tc">TC</span>
+      <span class="tc"> TC</span>
     </div>
 
     <button class="btn" onclick="openWithdraw()">
       💸 Вывести TC
     </button>
+
   </div>
 
   <div class="card">
+
     <div class="small">
-      🔒 Минимальный вывод: <b>10000 TC</b><br><br>
-      Заявка на вывод создаётся в игровом режиме.
+      Минимальная сумма вывода:
+      <b>10 000 TC</b>
+      <br><br>
+      После создания заявки её статус:
+      <b>ожидает обработки</b>.
     </div>
+
   </div>
 
 </section>
 
-<!-- ПРОФИЛЬ -->
+
 <section id="profile" class="page">
 
   <div class="sectionTitle">👤 Профиль</div>
@@ -424,17 +440,11 @@ body{
 
   </div>
 
-  <div class="card">
-    <div class="small">
-      🔐 Твой баланс хранится на сервере и привязан к Telegram ID.
-    </div>
-  </div>
-
 </section>
 
 </div>
 
-<!-- НИЖНЕЕ МЕНЮ -->
+
 <nav class="nav">
 
   <div class="navInner">
@@ -463,7 +473,7 @@ body{
 
 </nav>
 
-<!-- ОКНО ВЫВОДА -->
+
 <div id="withdrawModal" class="modal">
 
   <div class="modalBox">
@@ -475,8 +485,11 @@ body{
       <b>
         <span id="withdrawBalance">0</span> TC
       </b>
+
       <br><br>
-      Минимальная сумма: <b>10000 TC</b>
+
+      Минимум:
+      <b>10 000 TC</b>
     </div>
 
     <br>
@@ -493,7 +506,7 @@ body{
       Создать заявку
     </button>
 
-    <button class="btn closeBtn" onclick="closeWithdraw()">
+    <button class="btn secondary" onclick="closeWithdraw()">
       Закрыть
     </button>
 
@@ -501,16 +514,26 @@ body{
 
 </div>
 
+
 <script>
 
-const API_URL =
-"https://dljgksqjwelvktxahxr.supabase.co/functions/v1/taskcoinuser";
+const tg =
+  window.Telegram &&
+  window.Telegram.WebApp;
 
-const tg = window.Telegram && window.Telegram.WebApp;
+
+/* ТВОЯ SUPABASE EDGE FUNCTION */
+
+const API_URL =
+  "https://dljgksqjwelvktxahxrr.supabase.co/functions/v1/taskcoinuser";
+
 
 let currentUser = null;
 let balance = 0;
 let completedTasks = [];
+
+
+/* ЗАДАНИЯ */
 
 const tasks = [
 
@@ -552,162 +575,255 @@ const tasks = [
 
 ];
 
+
+/* НАВИГАЦИЯ */
+
 function showPage(page){
 
-  document.querySelectorAll(".page").forEach(function(el){
-    el.classList.remove("active");
-  });
+  document.querySelectorAll(".page")
+    .forEach(function(element){
+      element.classList.remove("active");
+    });
 
-  const target = document.getElementById(page);
+  const target =
+    document.getElementById(page);
 
   if(target){
     target.classList.add("active");
   }
 
-  document.querySelectorAll(".nav button").forEach(function(btn){
-    btn.classList.remove("active");
-  });
+  document.querySelectorAll(".nav button")
+    .forEach(function(button){
+      button.classList.remove("active");
+    });
 
-  const nav = document.getElementById("nav" + page.charAt(0).toUpperCase() + page.slice(1));
+  const navButton =
+    document.getElementById(
+      "nav" +
+      page.charAt(0).toUpperCase() +
+      page.slice(1)
+    );
 
-  if(nav){
-    nav.classList.add("active");
-  }
-
-  if(tg){
-    tg.HapticFeedback.impactOccurred("light");
+  if(navButton){
+    navButton.classList.add("active");
   }
 
   window.scrollTo(0,0);
+
 }
+
+
+/* UI */
 
 function updateUI(){
 
-  document.getElementById("homeBalance").textContent = balance;
-  document.getElementById("balanceValue").textContent = balance;
-  document.getElementById("withdrawBalance").textContent = balance;
+  document.getElementById("homeBalance")
+    .textContent = balance;
 
-  if(currentUser){
+  document.getElementById("balanceValue")
+    .textContent = balance;
 
-    const first =
-      currentUser.first_name || "";
+  document.getElementById("withdrawBalance")
+    .textContent = balance;
 
-    const last =
-      currentUser.last_name || "";
-
-    const fullName =
-      (first + " " + last).trim() || "Пользователь";
-
-    document.getElementById("profileName").textContent =
-      fullName;
-
-    document.getElementById("profileUsername").textContent =
-      currentUser.username
-      ? "@" + currentUser.username
-      : "нет";
-
-    document.getElementById("profileId").textContent =
-      currentUser.id || "—";
-
-    document.getElementById("profileTasks").textContent =
-      currentUser.tasks_completed || 0;
-
-    document.getElementById("avatar").textContent =
-      (first || "T").charAt(0).toUpperCase();
+  if(!currentUser){
+    return;
   }
 
+  const first =
+    currentUser.first_name || "";
+
+  const last =
+    currentUser.last_name || "";
+
+  const fullName =
+    (first + " " + last).trim() ||
+    "Пользователь";
+
+  document.getElementById("profileName")
+    .textContent = fullName;
+
+  document.getElementById("profileUsername")
+    .textContent =
+      currentUser.username
+        ? "@" + currentUser.username
+        : "нет";
+
+  document.getElementById("profileId")
+    .textContent =
+      currentUser.telegram_id || "—";
+
+  document.getElementById("profileTasks")
+    .textContent =
+      currentUser.tasks_completed || 0;
+
+  document.getElementById("avatar")
+    .textContent =
+      first
+        ? first.charAt(0).toUpperCase()
+        : "T";
 }
+
+
+/* ОТОБРАЖЕНИЕ ЗАДАНИЙ */
 
 function renderTasks(){
 
-  const box = document.getElementById("tasksList");
+  const container =
+    document.getElementById("tasksList");
 
-  box.innerHTML = "";
+  container.innerHTML = "";
 
   tasks.forEach(function(task){
 
     const done =
-      completedTasks.includes(Number(task.id));
+      completedTasks.includes(
+        Number(task.id)
+      );
 
-    const div = document.createElement("div");
+    const element =
+      document.createElement("div");
 
-    div.className = "task";
+    element.className = "task";
 
     let html = "";
 
-    html += '<div class="taskTop">';
-    html += '<div class="taskName">' + task.name + '</div>';
-    html += '<div class="taskReward">+' + task.reward + ' TC</div>';
-    html += '</div>';
+    html +=
+      '<div class="taskTop">';
 
-    html += '<div class="taskDescription">';
-    html += task.description;
-    html += '</div>';
+    html +=
+      '<div class="taskName">' +
+      task.name +
+      '</div>';
+
+    html +=
+      '<div class="taskReward">+' +
+      task.reward +
+      ' TC</div>';
+
+    html +=
+      '</div>';
+
+    html +=
+      '<div class="taskDescription">' +
+      task.description +
+      '</div>';
 
     if(done){
 
-      html += '<div class="taskDone">✅ Выполнено</div>';
+      html +=
+        '<div class="taskDone">✅ Выполнено</div>';
 
     }else{
 
       if(task.link){
 
-        html += '<button class="btn secondary" ';
-        html += 'onclick="openTaskLink(\'' + task.link + '\')">';
-        html += '📢 Открыть группу';
-        html += '</button>';
+        html +=
+          '<button class="btn secondary" ' +
+          'onclick="openTaskLink(' +
+          task.id +
+          ')">' +
+          '📢 Открыть группу' +
+          '</button>';
 
       }
 
-      html += '<button class="btn" ';
-      html += 'onclick="completeTask(' + task.id + ')">';
-      html += 'Получить +' + task.reward + ' TC';
-      html += '</button>';
+      html +=
+        '<button class="btn" ' +
+        'id="taskButton' +
+        task.id +
+        '" ' +
+        'onclick="completeTask(' +
+        task.id +
+        ')">' +
+        'Получить +' +
+        task.reward +
+        ' TC' +
+        '</button>';
 
     }
 
-    div.innerHTML = html;
+    element.innerHTML = html;
 
-    box.appendChild(div);
+    container.appendChild(element);
 
   });
 
 }
 
-function openTaskLink(link){
 
-  if(tg && tg.openTelegramLink){
+/* ССЫЛКА НА ЗАДАНИЕ */
 
-    tg.openTelegramLink(link);
+function openTaskLink(taskId){
+
+  const task =
+    tasks.find(function(item){
+      return item.id === taskId;
+    });
+
+  if(!task || !task.link){
+    return;
+  }
+
+  if(
+    tg &&
+    tg.openTelegramLink
+  ){
+
+    tg.openTelegramLink(task.link);
 
   }else{
 
-    window.open(link,"_blank");
+    window.open(
+      task.link,
+      "_blank"
+    );
 
   }
 
 }
 
+
+/* API */
+
 async function apiRequest(payload){
 
-  const response = await fetch(API_URL,{
+  const response =
+    await fetch(
+      API_URL,
+      {
+        method:"POST",
 
-    method:"POST",
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
 
-    headers:{
-      "Content-Type":"application/json"
-    },
+        body:
+          JSON.stringify(payload)
+      }
+    );
 
-    body:JSON.stringify(payload)
+  let data;
 
-  });
+  try{
 
-  const data = await response.json();
+    data =
+      await response.json();
+
+  }catch(error){
+
+    throw new Error(
+      "Сервер вернул неправильный ответ."
+    );
+
+  }
 
   if(!response.ok){
 
     throw new Error(
-      data.error || "Ошибка сервера"
+      data.error ||
+      "Ошибка сервера."
     );
 
   }
@@ -716,121 +832,182 @@ async function apiRequest(payload){
 
 }
 
+
+/* ЗАГРУЗКА ПОЛЬЗОВАТЕЛЯ */
+
 async function loadUser(){
 
-  if(!tg || !tg.initData){
+  if(!tg){
 
-    document.getElementById("tasksList").innerHTML =
-      '<div class="error">Открой TaskCoin внутри Telegram.</div>';
+    document.getElementById("tasksList")
+      .innerHTML =
+        '<div class="error">' +
+        'Открой TaskCoin через Telegram.' +
+        '</div>';
 
     return;
+  }
 
+  if(!tg.initData){
+
+    document.getElementById("tasksList")
+      .innerHTML =
+        '<div class="error">' +
+        'Telegram не передал данные приложения.<br><br>' +
+        'Закрой Mini App и открой его снова.' +
+        '</div>';
+
+    return;
   }
 
   try{
 
-    const result = await apiRequest({
+    const result =
+      await apiRequest({
 
-      action:"sync",
-      initData:tg.initData
+        action:"sync",
 
-    });
+        initData:
+          tg.initData
+
+      });
 
     if(!result.success){
-      throw new Error("Не удалось загрузить пользователя");
+
+      throw new Error(
+        "Не удалось загрузить пользователя."
+      );
+
     }
 
-    currentUser = result.user;
+    currentUser =
+      result.user;
 
     balance =
-      Number(result.user.balance || 0);
+      Number(
+        result.user.balance || 0
+      );
 
     completedTasks =
-      Array.isArray(result.user.completed_tasks)
-      ? result.user.completed_tasks.map(Number)
-      : [];
+      Array.isArray(
+        result.user.completed_tasks
+      )
+        ? result.user.completed_tasks.map(Number)
+        : [];
 
     updateUI();
+
     renderTasks();
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById("tasksList").innerHTML =
-      '<div class="error">' +
-      'Ошибка подключения к серверу.<br>' +
-      error.message +
-      '</div>';
+    document.getElementById("tasksList")
+      .innerHTML =
+        '<div class="error">' +
+        '<b>Ошибка подключения к серверу.</b>' +
+        '<br><br>' +
+        error.message +
+        '<br><br>' +
+        'Закрой Mini App и открой его снова.' +
+        '</div>';
 
   }
 
 }
 
+
+/* ВЫПОЛНЕНИЕ ЗАДАНИЯ */
+
 async function completeTask(taskId){
 
-  if(!tg || !tg.initData){
+  if(
+    !tg ||
+    !tg.initData
+  ){
 
-    alert("Открой приложение через Telegram.");
+    alert(
+      "Открой приложение через Telegram."
+    );
+
     return;
-
   }
 
-  if(completedTasks.includes(Number(taskId))){
+  if(
+    completedTasks.includes(
+      Number(taskId)
+    )
+  ){
 
     return;
+  }
+
+  const button =
+    document.getElementById(
+      "taskButton" + taskId
+    );
+
+  if(button){
+
+    button.disabled = true;
+    button.textContent = "Обработка...";
 
   }
 
   try{
 
-    const result = await apiRequest({
+    const result =
+      await apiRequest({
 
-      action:"complete_task",
+        action:"complete_task",
 
-      initData:tg.initData,
+        initData:
+          tg.initData,
 
-      taskId:Number(taskId)
+        taskId:
+          Number(taskId)
 
-    });
+      });
 
     if(!result.success){
 
       throw new Error(
-        result.error || "Ошибка"
+        result.error ||
+        "Не удалось выполнить задание."
       );
 
     }
 
-    currentUser = result.user;
+    currentUser =
+      result.user;
 
     balance =
-      Number(result.user.balance || 0);
-
-    completedTasks =
-      Array.isArray(result.user.completed_tasks)
-      ? result.user.completed_tasks.map(Number)
-      : [];
-
-    updateUI();
-    renderTasks();
-
-    if(tg){
-      tg.HapticFeedback.notificationOccurred("success");
-    }
-
-    if(tg && tg.showAlert){
-
-      tg.showAlert(
-        "🎉 Задание выполнено!\n\n" +
-        "Твой баланс: " +
-        balance +
-        " TC"
+      Number(
+        result.user.balance || 0
       );
 
-    }else{
+    completedTasks =
+      Array.isArray(
+        result.user.completed_tasks
+      )
+        ? result.user.completed_tasks.map(Number)
+        : [];
 
-      alert(
+    updateUI();
+
+    renderTasks();
+
+    try{
+
+      tg.HapticFeedback
+        .notificationOccurred("success");
+
+    }catch(e){}
+
+    if(tg.showAlert){
+
+      tg.showAlert(
         "🎉 Задание выполнено!\n\n" +
         "Баланс: " +
         balance +
@@ -843,15 +1020,34 @@ async function completeTask(taskId){
 
     console.error(error);
 
-    if(tg && tg.showAlert){
+    if(button){
+
+      button.disabled = false;
+
+      const task =
+        tasks.find(function(item){
+          return item.id === taskId;
+        });
+
+      button.textContent =
+        "Получить +" +
+        (task ? task.reward : 0) +
+        " TC";
+    }
+
+    if(tg.showAlert){
 
       tg.showAlert(
-        "Ошибка: " + error.message
+        "Ошибка:\n" +
+        error.message
       );
 
     }else{
 
-      alert("Ошибка: " + error.message);
+      alert(
+        "Ошибка:\n" +
+        error.message
+      );
 
     }
 
@@ -859,27 +1055,38 @@ async function completeTask(taskId){
 
 }
 
+
+/* ВЫВОД */
+
 function openWithdraw(){
 
-  document.getElementById("withdrawAmount").value = "";
+  document.getElementById(
+    "withdrawAmount"
+  ).value = "";
 
-  document.getElementById("withdrawModal")
-    .classList.add("show");
+  document.getElementById(
+    "withdrawModal"
+  ).classList.add("show");
 
 }
+
 
 function closeWithdraw(){
 
-  document.getElementById("withdrawModal")
-    .classList.remove("show");
+  document.getElementById(
+    "withdrawModal"
+  ).classList.remove("show");
 
 }
+
 
 function createWithdraw(){
 
   const amount =
     Number(
-      document.getElementById("withdrawAmount").value
+      document.getElementById(
+        "withdrawAmount"
+      ).value
     );
 
   if(!amount){
@@ -887,59 +1094,63 @@ function createWithdraw(){
     alert("Введите сумму.");
 
     return;
-
   }
 
   if(amount < 10000){
 
     alert(
-      "Минимальный вывод — 10000 TC."
+      "Минимальный вывод — 10 000 TC."
     );
 
     return;
-
   }
 
   if(amount > balance){
 
     alert(
-      "Недостаточно TC на балансе."
+      "Недостаточно TC."
     );
 
     return;
-
   }
 
   closeWithdraw();
 
-  if(tg && tg.showAlert){
+  const message =
+    "✅ Заявка создана!\n\n" +
+    "Сумма: " +
+    amount +
+    " TC\n\n" +
+    "Статус: ожидает обработки.";
 
-    tg.showAlert(
-      "✅ Заявка на вывод создана!\n\n" +
-      "Сумма: " + amount + " TC\n\n" +
-      "Статус: ожидает обработки."
-    );
+  if(
+    tg &&
+    tg.showAlert
+  ){
+
+    tg.showAlert(message);
 
   }else{
 
-    alert(
-      "✅ Заявка на вывод создана!\n\n" +
-      "Сумма: " + amount + " TC\n\n" +
-      "Статус: ожидает обработки."
-    );
+    alert(message);
 
   }
 
 }
 
+
+/* ЗАПУСК */
+
 if(tg){
 
   tg.ready();
+
   tg.expand();
 
 }
 
 renderTasks();
+
 loadUser();
 
 </script>
