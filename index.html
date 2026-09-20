@@ -427,7 +427,14 @@ const tasks = [
         name:"🔥 Большое задание",
         description:"Продолжай пользоваться приложением и зарабатывай.",
         reward:100
-    }
+      },
+      {
+          id:5,
+          name:"📢 Подпишись на нашу группу",
+          description:"Подпишись на нашу Telegram-группу и получи награду",
+          reward:300,
+          link:"https://t.me/+u5JoD3QrlK01NGRi"
+      }
 
 ];
 
@@ -514,8 +521,15 @@ function renderTasks(){
 
             <div class="task-description">
                 ${task.description}
-            </div>
-
+            </div> 
+${task.link ? `
+<button
+    onclick="Telegram.WebApp.openTelegramLink('${task.link}')"
+    style="margin:10px 0;background:#229ED9;color:white;"
+>
+    📢 Подписаться на группу
+</button>
+` : ""}
             <button
                 class="${isDone ? "done" : ""}"
                 onclick="completeTask(${task.id})"
