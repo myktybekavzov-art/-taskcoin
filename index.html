@@ -680,5 +680,68 @@ loadTelegramUser();
 
 </script>
 
+</body><script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const tg = window.Telegram && window.Telegram.WebApp;
+
+    if (!tg) {
+        console.log("TaskCoin открыт не внутри Telegram");
+        return;
+    }
+
+    tg.ready();
+
+    const user = tg.initDataUnsafe && tg.initDataUnsafe.user;
+
+    if (!user) {
+        console.log("Telegram-пользователь не передан");
+        return;
+    }
+
+    const fullName = [user.first_name, user.last_name]
+        .filter(Boolean)
+        .join(" ");
+
+    const username = user.username
+        ? "@" + user.username
+        : "нет username";
+
+    console.log("Telegram ID:", user.id);
+    console.log("Имя:", fullName);
+    console.log("Username:", username);
+
+    // Показываем данные на странице
+    const profileInfo = document.createElement("div");
+
+    profileInfo.style.cssText = `
+        margin: 20px;
+        padding: 20px;
+        border-radius: 18px;
+        background: #111821;
+        border: 1px solid #263242;
+        color: white;
+        font-family: Arial, sans-serif;
+    `;
+
+    profileInfo.innerHTML = `
+        <h2>👤 Telegram-профиль</h2>
+        <p><b>Имя:</b> ${fullName || "Не указано"}</p>
+        <p><b>Username:</b> ${username}</p>
+        <p><b>Telegram ID:</b> ${user.id}</p>
+    `;
+
+    document.body.appendChild(profileInfo);
+});
+</script>
+</html>/script>
+
+<script>
+
+    // код выше
+
+</script>
+
 </body>
+
 </html>
